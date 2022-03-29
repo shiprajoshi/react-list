@@ -18,7 +18,7 @@ const AddDeleteListItems=()=>{
     const handleDelete=(e, index)=>{
         e.preventDefault();
         const newList = list.filter((el, i)=> i !== index)
-        setList([...newList])
+        setList(newList)
     }
 
     return <div>
@@ -28,20 +28,15 @@ const AddDeleteListItems=()=>{
                 <input type="text" id="name" name="name" required/>
                 <br/>
                 <label for="place">Friend's place </label>
-                <input type="text" id="place" name="places" reaquired/>
+                <input type="text" id="place" name="places" required/>
                 <br/>
                 <button type="submit">Add friend</button>
 
                 <h3>My friends list</h3>
                 <ul>
                 {
-                    list.map((el,index)=>{
-                        return <React.Fragment key={index+el.name}>
-                                <li style={{display: 'inline-block'}}>{el.name}</li>
-                                <button onClick={(e)=>handleDelete(e,index)}> X </button>
-                                <br/>
-                        </React.Fragment>
-                    })
+                    list.map((el,index) =>
+                                <li key={el.name+index}><input type="text" defaultValue={el.name }/><button onClick={(e)=>handleDelete(e,index)}> X </button></li>)
                 }
                 </ul>
             </center>
