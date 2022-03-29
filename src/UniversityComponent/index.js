@@ -1,7 +1,6 @@
-import { Alert, CircularProgress, Input, Table, TableCell, TableHead, TableRow, TextField } from "@mui/material";
+import { Alert, CircularProgress, Table, TableCell, TableHead, TableRow, TextField } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
-import { FixedSizeList } from "react-window";
 import './index.css'
 const UniversityList = () =>{
 
@@ -52,8 +51,7 @@ const UniversityList = () =>{
     }
 
 return(<>{
-        isLoading ? 
-    <CircularProgress/> :<>
+        isLoading ? <CircularProgress/> :<>
     <div className="list" >
     <Box sx={{ display: 'flex', alignItems: 'flex-end', float:'left'}}>
         <TextField 
@@ -70,28 +68,10 @@ return(<>{
         onChange={(e)=>handleChange(e,'country')}
         />
       </Box>
-        {/* <FixedSizeList 
-        className="List"
-        itemData={renderList}
-        itemCount= {renderList.length}
-        itemSize={50}
-        height={700}
-        width={400}
-        >{
-            ({data,index,style})=>{
-                return <><TableRow className="ListItemOdd" name = {`name${index}`} style={{...style,borderBottom:"none"}}>
-                <TableCell>{index+1}</TableCell>
-                <TableCell>{data[index].name}</TableCell>
-                <TableCell>{data[index].country}</TableCell>
-                </TableRow></>
-            }
-        }       
-        </FixedSizeList> */}
        
     { 
     renderList.length === 0 ? 
         <Alert severity="info" style={{width: "100%", height: "100%"}}>Sorry! No data available</Alert>:
-
       <Table>
                 <TableHead>
                     <TableRow>
@@ -104,9 +84,6 @@ return(<>{
                         <TableCell style={{color: 'white', fontWeight: 'bolder'}}>
                             University Country
                         </TableCell>
-                        {/* <TableCell>
-                            University WebPage
-                        </TableCell> */}
                     </TableRow>
                 </TableHead>
                     {renderList.map((university, index)=><>
@@ -118,7 +95,6 @@ return(<>{
                     <TableCell style={{padding: "10px"}}>{index+1}</TableCell>
                     <TableCell style={{padding: "10px"}}>{university.name} </TableCell>
                     <TableCell style={{padding: "10px"}}>{university.country}</TableCell>
-                    {/* <TableCell>{university.web_pages}</TableCell> */}
                 </TableRow></>)}
             </Table>
 }

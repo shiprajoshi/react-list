@@ -1,10 +1,12 @@
 import logo from './logo.svg';
 import './App.css';
-import { HashRouter as BrowserRouter, Route, Routes , Switch} from 'react-router-dom';
+import { HashRouter as BrowserRouter, Route , Switch} from 'react-router-dom';
 import { Link as L} from 'react-router-dom/cjs/react-router-dom.min';
 import { Link } from '@mui/material';
-import UniversityList from './UniversityComponent';
 import { FootballMatches } from './Football';
+import React, { Suspense } from 'react';
+const PlayWithList = React.lazy(()=> import('./AddDeleteListItems/index'));
+const UniversityList = React.lazy(()=> import('./UniversityComponent/index'));
 
 function App() {
   return (
@@ -25,10 +27,16 @@ function App() {
                 Football
               </Link>
             </L>
+            <L to ='/playwithlist'>
+              <Link>Play with lists</Link>
+            </L>
             <Switch>
               <Route exact path={'/'} component={()=><div>ho</div>}></Route>
-              <Route exact path="/universities" component={UniversityList}></Route>
               <Route exact path="/football" component={FootballMatches}></Route>
+              <Suspense fallback={<>Loadingg=....</>}>
+                <Route exact path="/universities" component={UniversityList}></Route>
+                <Route exact path="/playwithlist" component={PlayWithList}></Route>
+              </Suspense>
             </Switch>
           </BrowserRouter>
       </header>
