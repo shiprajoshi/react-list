@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Theme } from "../ThemeProvider";
 const AddDeleteListItems=()=>{
+    const theme = useContext(Theme);
     const [list, setList] = React.useState([]);
 
     const handleSubmit=(e)=>{
@@ -21,10 +22,7 @@ const AddDeleteListItems=()=>{
         setList(newList)
     }
 
-    return <div>
-        <Theme.Consumer>{
-            (theme)=>
-            <div className={theme}>
+    return<div className="friendslist"> <div className={theme}>
             <form onSubmit={handleSubmit} id="form">
                 <center>
                 <label for="name">Friend's name </label>
@@ -45,8 +43,6 @@ const AddDeleteListItems=()=>{
             </center>
         </form>
         </div>
-        }
-        </Theme.Consumer>
     </div>
 }
 

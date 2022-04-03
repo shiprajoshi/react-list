@@ -42,3 +42,10 @@
   font-size: calc(10px + 2vmin);
   color: black;
 }
+
+.friendslist > .dark{
+  background-color: rgb(181 181 181);
+  min-height: 100vh;
+
+
+}

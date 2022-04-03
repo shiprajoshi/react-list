@@ -3,15 +3,16 @@ import { HashRouter as BrowserRouter, Route , Switch} from 'react-router-dom';
 import { Link as L} from 'react-router-dom/cjs/react-router-dom.min';
 import { Link } from '@mui/material';
 import { FootballMatches } from './Football';
-import React, { createContext, Suspense, useState } from 'react';
+import React, { Suspense, useContext } from 'react';
+import { Theme } from './ThemeProvider';
 const PlayWithList = React.lazy(()=> import('./AddDeleteListItems/index'));
 const UniversityList = React.lazy(()=> import('./UniversityComponent/index'));
 
 function App() {
- 
+ const theme = useContext(Theme);
   return (
     <div className="App">
-      <header className="App-header">
+      <header className={`App-header ${theme}`}>
           <BrowserRouter>
             <L to = "/">
               <Link href="/">Landing</Link>
