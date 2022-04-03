@@ -1,8 +1,10 @@
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { UserDetails } from "../Provider/UserLoginProvider";
+import {Redirect} from 'react-router-dom'
 
 export const FootballMatches = ()=>{
-
+    const userDetails = useContext(UserDetails);
     const [matches, setMatches] = useState([]);
     const [currentPage, setCurrentPage] = useState(1); //2
         async function fethFootballMatches(){
@@ -32,7 +34,7 @@ export const FootballMatches = ()=>{
         }
     })
 
-    return <div>
+    return <>{ userDetails.isLoggedIn ? <div>
         <h1>Teams Played:</h1>
         <div>
         <TableContainer component={Paper}>
@@ -65,5 +67,6 @@ export const FootballMatches = ()=>{
                 </Table>
         </TableContainer>
         </div>
-    </div>
+    </div>: <Redirect to="/login"/>}
+</>
 }

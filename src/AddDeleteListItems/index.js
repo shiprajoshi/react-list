@@ -1,7 +1,10 @@
 import React, { useContext } from "react";
-import { Theme } from "../ThemeProvider";
+import { Theme } from "../Provider/index";
+import { UserDetails } from "../Provider/UserLoginProvider";
+import {Redirect} from 'react-router-dom';
 const AddDeleteListItems=()=>{
     const theme = useContext(Theme);
+    const userDetails = useContext(UserDetails);
     const [list, setList] = React.useState([]);
 
     const handleSubmit=(e)=>{
@@ -9,6 +12,7 @@ const AddDeleteListItems=()=>{
         const formData = new FormData(e.target);
         let formobj = {};
        for (var pair of formData) {
+           console.log(pair)
            formobj[pair[0]] = pair[1]
       }
         setList((prev)=>[...prev, {
@@ -22,8 +26,9 @@ const AddDeleteListItems=()=>{
         setList(newList)
     }
 
-    return<div className="friendslist"> <div className={theme}>
-            <form onSubmit={handleSubmit} id="form">
+    return<>{ userDetails.isLoggedIn ? <div className="friendslist"> 
+        <div className={theme}>
+            <form onSubmit={handleSubmit}>
                 <center>
                 <label for="name">Friend's name </label>
                 <input type="text" id="name" name="name" required/>
@@ -43,7 +48,8 @@ const AddDeleteListItems=()=>{
             </center>
         </form>
         </div>
-    </div>
+    </div>: <Redirect to = '/login'/>}
+</>
 }
 
 export default AddDeleteListItems

@@ -3,8 +3,9 @@ import { HashRouter as BrowserRouter, Route , Switch} from 'react-router-dom';
 import { Link as L} from 'react-router-dom/cjs/react-router-dom.min';
 import { Link } from '@mui/material';
 import { FootballMatches } from './Football';
+import { Login } from './LoginPage';
 import React, { Suspense, useContext } from 'react';
-import { Theme } from './ThemeProvider';
+import { Theme } from './Provider/index';
 const PlayWithList = React.lazy(()=> import('./AddDeleteListItems/index'));
 const UniversityList = React.lazy(()=> import('./UniversityComponent/index'));
 
@@ -34,6 +35,7 @@ function App() {
             <Switch>
               <Route exact path={'/'} component={()=><div>ho</div>}></Route>
               <Route exact path="/football" component={FootballMatches}></Route>
+              <Route exact path="/login" component={Login}></Route>
               <Suspense fallback={<>Loadingg=....</>}>
                 <Route exact path="/universities" component={UniversityList}></Route>
                 <Route exact path="/playwithlist" component={PlayWithList}></Route>

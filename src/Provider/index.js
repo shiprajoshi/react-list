@@ -3,7 +3,7 @@ import { ToggleButton } from "../ToggleButton";
 
 export const Theme = React.createContext('dark');
 
-export const Provider=(props)=>{
+export const ThemeProvider=(props)=>{
     const [theme, setTheme] = React.useState('dark');
     const toggleTheme=(e)=>{
       if(e.target.value === '0') setTheme('light');

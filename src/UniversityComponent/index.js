@@ -1,12 +1,16 @@
 import { Alert, CircularProgress, Table, TableCell, TableHead, TableRow, TextField } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
+import { UserDetails } from "../Provider/UserLoginProvider";
+import {Redirect} from 'react-router-dom';
 import './index.css'
 const UniversityList = () =>{
 
     const [universityList, setUniversityList] = React.useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [renderList, setRenderList] = useState([]);
+    const userDetails = React.useContext(UserDetails);
+    console.log(userDetails)
     useEffect(()=>{
         (async function(){
            setIsLoading(true);
@@ -51,23 +55,24 @@ const UniversityList = () =>{
     }
 
 return(<>{
+    userDetails.isLoggedIn ?
         isLoading ? <CircularProgress/> :<>
-    <div className="list" >
-    <Box sx={{ display: 'flex', alignItems: 'flex-end', float:'left'}}>
-        <TextField 
-        id="input-with-sx" label="Search By Universtity Name" 
-        variant="standard" style={{background: 'white'}}
-        onChange={(e)=>handleChange(e,'name')}
-        />
-      </Box>       
+            <div className="list" >
+            <Box sx={{ display: 'flex', alignItems: 'flex-end', float:'left'}}>
+                <TextField 
+                id="input-with-sx" label="Search By Universtity Name" 
+                variant="standard" style={{background: 'white'}}
+                onChange={(e)=>handleChange(e,'name')}
+                />
+             </Box>       
       
-      <Box sx={{ display: 'flex', alignItems: 'flex-end', float:'right' }}>
-        <TextField id="input-with-sx" label="Search By Country" 
-        variant="standard" 
-        style={{background: 'white'}}
-        onChange={(e)=>handleChange(e,'country')}
-        />
-      </Box>
+            <Box sx={{ display: 'flex', alignItems: 'flex-end', float:'right' }}>
+             <TextField id="input-with-sx" label="Search By Country" 
+                variant="standard" 
+                style={{background: 'white'}}
+                onChange={(e)=>handleChange(e,'country')}
+            />
+        </Box>
        
     { 
     renderList.length === 0 ? 
@@ -100,6 +105,7 @@ return(<>{
 }
             </div>
          </>
+         : <Redirect to="/login"/>
     }</>)
 }
 

@@ -3,13 +3,15 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { Provider } from './ThemeProvider';
-
+import { ThemeProvider } from './Provider/index';
+import  { UserDetails } from './Provider/UserLoginProvider';
 ReactDOM.render(
   <React.StrictMode>
-    <Provider>
-      <App />
-    </Provider>
+    <UserDetails.Provider value={{}}>
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>
+    </UserDetails.Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
