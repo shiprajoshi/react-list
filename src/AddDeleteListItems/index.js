@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Theme } from "../App";
 const AddDeleteListItems=()=>{
     const [list, setList] = React.useState([]);
 
@@ -22,8 +22,11 @@ const AddDeleteListItems=()=>{
     }
 
     return <div>
-        <form onSubmit={handleSubmit} id="form">
-            <center>
+        <Theme.Consumer>{
+            (theme)=>
+            <div className={theme}>
+            <form onSubmit={handleSubmit} id="form">
+                <center>
                 <label for="name">Friend's name </label>
                 <input type="text" id="name" name="name" required/>
                 <br/>
@@ -41,6 +44,9 @@ const AddDeleteListItems=()=>{
                 </ul>
             </center>
         </form>
+        </div>
+        }
+        </Theme.Consumer>
     </div>
 }
 

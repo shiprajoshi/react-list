@@ -1,17 +1,29 @@
-import logo from './logo.svg';
 import './App.css';
 import { HashRouter as BrowserRouter, Route , Switch} from 'react-router-dom';
 import { Link as L} from 'react-router-dom/cjs/react-router-dom.min';
 import { Link } from '@mui/material';
 import { FootballMatches } from './Football';
-import React, { Suspense } from 'react';
+import React, { createContext, Suspense, useState } from 'react';
 const PlayWithList = React.lazy(()=> import('./AddDeleteListItems/index'));
 const UniversityList = React.lazy(()=> import('./UniversityComponent/index'));
+export const Theme = createContext('dark');
 
 function App() {
+  const [theme, setTheme] = useState('dark');
+  const toggleTheme=(e)=>{
+    if(e.target.value === '0') setTheme('light');
+    else if(e.target.value === '1') setTheme('dark');
+  }
   return (
     <div className="App">
+      <div className="toggleButton">
+        <labe for="toggle">Dark Theme</labe>
+        <input id="toggle" type="range" min="0" max="1"
+        onChange={toggleTheme}
+        ></input>
+    </div>
       <header className="App-header">
+        <Theme.Provider value={theme}>
           <BrowserRouter>
             <L to = "/">
               <Link href="/">Landing</Link>
@@ -39,6 +51,7 @@ function App() {
               </Suspense>
             </Switch>
           </BrowserRouter>
+        </Theme.Provider>
       </header>
     </div>
   );
