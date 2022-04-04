@@ -1,10 +1,8 @@
 import React, { useContext } from "react";
 import { Theme } from "../Provider/index";
-import { UserDetails } from "../Provider/UserLoginProvider";
-import {Redirect} from 'react-router-dom';
+import { PrivateRoute } from "../PrivateRoutes/PrivateRoutes";
 const AddDeleteListItems=()=>{
     const theme = useContext(Theme);
-    const userDetails = useContext(UserDetails);
     const [list, setList] = React.useState([]);
 
     const handleSubmit=(e)=>{
@@ -26,7 +24,7 @@ const AddDeleteListItems=()=>{
         setList(newList)
     }
 
-    return<>{ userDetails.isLoggedIn ? <div className="friendslist"> 
+    return<PrivateRoute><div className="friendslist"> 
         <div className={theme}>
             <form onSubmit={handleSubmit}>
                 <center>
@@ -48,8 +46,8 @@ const AddDeleteListItems=()=>{
             </center>
         </form>
         </div>
-    </div>: <Redirect to = '/login'/>}
-</>
+    </div>
+</PrivateRoute>
 }
 
 export default AddDeleteListItems

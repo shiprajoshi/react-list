@@ -2,6 +2,7 @@ import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow
 import React, { useContext, useEffect, useState } from "react";
 import { UserDetails } from "../Provider/UserLoginProvider";
 import {Redirect} from 'react-router-dom'
+import { PrivateRoute } from "../PrivateRoutes/PrivateRoutes";
 
 export const FootballMatches = ()=>{
     const userDetails = useContext(UserDetails);
@@ -34,7 +35,7 @@ export const FootballMatches = ()=>{
         }
     })
 
-    return <>{ userDetails.isLoggedIn ? <div>
+    return <PrivateRoute><div>
         <h1>Teams Played:</h1>
         <div>
         <TableContainer component={Paper}>
@@ -67,6 +68,6 @@ export const FootballMatches = ()=>{
                 </Table>
         </TableContainer>
         </div>
-    </div>: <Redirect to="/login"/>}
-</>
+    </div>
+</PrivateRoute>
 }

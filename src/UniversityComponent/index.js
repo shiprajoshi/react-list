@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { UserDetails } from "../Provider/UserLoginProvider";
 import {Redirect} from 'react-router-dom';
 import './index.css'
+import { PrivateRoute } from "../PrivateRoutes/PrivateRoutes";
 const UniversityList = () =>{
 
     const [universityList, setUniversityList] = React.useState([]);
@@ -54,9 +55,8 @@ const UniversityList = () =>{
         }, 0)
     }
 
-return(<>{
-    userDetails.isLoggedIn ?
-        isLoading ? <CircularProgress/> :<>
+return(<PrivateRoute>
+        {isLoading ? <CircularProgress/> :<>
             <div className="list" >
             <Box sx={{ display: 'flex', alignItems: 'flex-end', float:'left'}}>
                 <TextField 
@@ -105,8 +105,7 @@ return(<>{
 }
             </div>
          </>
-         : <Redirect to="/login"/>
-    }</>)
+ } </PrivateRoute>)
 }
 
 export default UniversityList
